@@ -1,0 +1,21 @@
+{
+  "name": "Ultron Trading",
+  "short_name": "Ultron",
+  "description": "Trading Platform with AI Analysis",
+  "start_url": "/ultron-trading/",
+  "display": "standalone",
+  "theme_color": "#1E90FF",
+  "background_color": "#0a0e1a",
+  "icons": [
+    {
+      "src": "https://dawidzinserling.github.io/ultron-trading/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://dawidzinserling.github.io/ultron-trading/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
