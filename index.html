@@ -1928,38 +1928,42 @@ const getUpdateBanner = () => {
   `;
 };
 
-// Open update link
 const openUpdateLink = () => {
-  if (appVersion.downloadLink) {
-    // Try to extract file ID
-    const match = appVersion.downloadLink.match(/[-\w]{25,}/);
-    let finalUrl = appVersion.downloadLink;
-    
-    if (match) {
-      const fileId = match[0];
-      // Use direct download format
-      finalUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-    }
-    
-    // Force open in external browser
-    if (window.ReactNativeWebView) {
-      // For React Native WebView
-      window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'openUrl', url: finalUrl }));
-    } else {
-      // For standard Android WebView - use intent
-      try {
-        // Try to open with Google Drive app
-        window.location.href = `intent://${finalUrl.replace('https://', '')}#Intent;scheme=https;action=android.intent.action.VIEW;end;`;
-      } catch(e) {
-        // Fallback to normal window.open
-        window.open(finalUrl, '_system');
-      }
-    }
-    
-    showMsg('Opening download link...', 'success');
-  } else {
+  if (!appVersion.downloadLink) {
     showMsg('No download link available. Contact admin.', 'error');
+    return;
   }
+  
+  // Show options dialog for better user experience
+  const modal = document.createElement('div');
+  modal.className = 'modal-overlay';
+  modal.innerHTML = `
+    <div class="modal-content">
+      <div class="modal-title">📱 Update Available</div>
+      <div class="modal-sub">Version ${appVersion.latest} is ready to download</div>
+      <div style="margin: 15px 0; display: flex; flex-direction: column; gap: 10px;">
+        <button class="btn btn-p" onclick="window.open('${appVersion.downloadLink}', '_blank'); this.closest('.modal-overlay').remove();">
+          ⬇️ Download Now
+        </button>
+        <button class="btn btn-gh" onclick="copyToClipboard('${appVersion.downloadLink}'); this.closest('.modal-overlay').remove();">
+          📋 Copy Link (if download fails)
+        </button>
+        <button class="btn btn-gh" onclick="this.closest('.modal-overlay').remove()">
+          Cancel
+        </button>
+      </div>
+      <div style="font-size: 11px; color: var(--tx3); text-align: center;">
+        💡 Tap Download, then tap "Allow" if prompted
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+};
+
+// Add this helper function if not already present
+const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text);
+  showMsg('Link copied! Open Chrome and paste to download.', 'success');
 };
 const saveAppSettings = async () => {
   try {
