@@ -518,14 +518,12 @@ const DEFAULT_TOKEN_LIMITS = {
 // ============================================================
 // STATE
 // ============================================================
-
 let appVersion = {
   current: '1.1',
-  latest: '1.1',
+  latest: '1.2.1',
   downloadLink: '',
   updateAvailable: false
 };
-
 let shoppingCart = []; 
 let tokenPackages = [];
 let currentUser = null;
@@ -1930,77 +1928,39 @@ const getUpdateBanner = () => {
   `;
 };
 
+// Open update link
 const openUpdateLink = () => {
-  if (!appVersion.downloadLink) {
-    showMsg('No download link available. Contact admin.', 'error');
-    return;
-  }
-  
-  // Show options dialog
-  const modal = document.createElement('div');
-  modal.className = 'modal-overlay';
-  modal.innerHTML = `
-    <div class="modal-content">
-      <div class="modal-title">📱 Download Update v${appVersion.latest}</div>
-      <div class="modal-sub" style="background:rgba(255,165,0,0.1);padding:12px;border-radius:10px;margin-bottom:12px;">
-        ⚠️ <strong>Having trouble downloading?</strong><br>
-        Tap "Copy Link", open Chrome browser, paste the link, and download there.
-      </div>
-      <div style="margin: 15px 0; display: flex; flex-direction: column; gap: 10px;">
-        <button class="btn btn-p" onclick="downloadApkDirectly(); this.closest('.modal-overlay').remove();">
-          ⬇️ Download Now
-        </button>
-        <button class="btn btn-gh" onclick="copyGithubLink(); this.closest('.modal-overlay').remove();">
-          📋 Copy Link (Recommended if download fails)
-        </button>
-        <button class="btn btn-gh" onclick="this.closest('.modal-overlay').remove()">
-          Cancel
-        </button>
-      </div>
-      <div style="font-size: 11px; color: var(--tx3); text-align: center; margin-top: 8px;">
-        💡 Files open in browser - tap the download button there
-      </div>
-    </div>
-  `;
-  document.body.appendChild(modal);
-};
-
-const downloadApkDirectly = () => {
-  if (!appVersion.downloadLink) return;
-  
-  // Just open the link - Google Drive will show the download button
-  window.open(appVersion.downloadLink, '_blank');
-  
-  showMsg('Opening Google Drive... Tap the download button there.', 'success');
-};
-const copyGithubLink = () => {
-  const link = appVersion.downloadLink;
-  
-  // Try modern method first
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(link).then(() => {
-      showMsg('✅ Link copied! Open Chrome, paste, and download.', 'success');
-    }).catch(() => {
-      // Fallback for when modern method fails
-      fallbackCopy(link);
-    });
+  if (appVersion.downloadLink) {
+    // Try to extract file ID
+    const match = appVersion.downloadLink.match(/[-\w]{25,}/);
+    let finalUrl = appVersion.downloadLink;
+    
+    if (match) {
+      const fileId = match[0];
+      // Use direct download format
+      finalUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+    }
+    
+    // Force open in external browser
+    if (window.ReactNativeWebView) {
+      // For React Native WebView
+      window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'openUrl', url: finalUrl }));
+    } else {
+      // For standard Android WebView - use intent
+      try {
+        // Try to open with Google Drive app
+        window.location.href = `intent://${finalUrl.replace('https://', '')}#Intent;scheme=https;action=android.intent.action.VIEW;end;`;
+      } catch(e) {
+        // Fallback to normal window.open
+        window.open(finalUrl, '_system');
+      }
+    }
+    
+    showMsg('Opening download link...', 'success');
   } else {
-    fallbackCopy(link);
+    showMsg('No download link available. Contact admin.', 'error');
   }
 };
-
-const fallbackCopy = (text) => {
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.style.position = 'fixed';
-  textarea.style.opacity = '0';
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand('copy');
-  document.body.removeChild(textarea);
-  showMsg('✅ Link copied! Open Chrome, paste, and download.', 'success');
-};
-
 const saveAppSettings = async () => {
   try {
     const check = await sbFetch('app_settings?key=eq.main&select=key', 'GET');
