@@ -192,24 +192,6 @@ label { font-size:12px; color:var(--tx2); display:block; margin-bottom:4px; font
   margin-bottom: 0;
 }
 
-/* Date picker styling */
-input[type="date"] {
-  color-scheme: dark;
-  background: var(--bg3);
-  border: 1.5px solid var(--bd2);
-  border-radius: var(--radius2);
-  padding: 12px 14px;
-  color: var(--tx);
-  font-size: 14px;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-  background-color: var(--a1);
-  border-radius: 4px;
-  padding: 4px;
-  cursor: pointer;
-}
-
 .contact-card { background:var(--s1); border:1px solid var(--bd); border-radius:var(--radius2); padding:14px; margin-bottom:10px; display:flex; align-items:center; gap:14px; }
 .c-av { width:46px; height:46px; background:linear-gradient(135deg,var(--a1),var(--a3)); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:17px; color:#fff; flex-shrink:0; }
 .c-name { font-weight:700; font-size:15px; }
@@ -445,290 +427,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .update-banner .update-text { font-weight: 800; font-size: 14px; letter-spacing: 1px; }
 .update-banner .update-version { background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
 .update-banner .update-btn { background: white; color: #1E90FF; border: none; padding: 6px 16px; border-radius: 30px; font-weight: 700; font-size: 12px; cursor: pointer; }
-
-/* Theme Switcher Styles - MAKE SURE THIS IS IN YOUR CSS */
-.theme-switcher {
-  background: var(--s2);
-  border-radius: 12px;
-  padding: 12px;
-  margin-bottom: 12px;
-}
-.theme-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-top: 8px;
-}
-.theme-option {
-  padding: 8px 6px;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 11px;
-  font-weight: 600;
-  transition: all 0.2s;
-  border: 2px solid transparent;
-}
-.theme-option.active {
-  border-color: var(--a1);
-  background: rgba(30, 144, 255, 0.15);
-}
-.theme-option.dark-default { background: #1a1f30; color: #E8F0FF; }
-.theme-option.dark-red { background: #1a0a0a; color: #FF5555; }
-.theme-option.dark-blue { background: #0A1030; color: #0066FF; }
-.theme-option.dark-lime { background: #0A1A0A; color: #32FF32; }
-.theme-option.light-red { background: #FFD6D6; color: #DC2626; }
-.theme-option.light-green { background: #A7F3D0; color: #16A34A; }
-.theme-option.light-pink { background: #F9A8D4; color: #DB2777; }
-.theme-option.light-blue { background: #93C5FD; color: #2563EB; }
-.theme-option.light-purple { background: #D8B4FE; color: #9333EA; }
-.theme-option.light-yellow { background: #FACC15; color: #A16207; }
-
-/* ========== THEME COLOR DEFINITIONS ========== */
-
-/* DEFAULT THEME (Your existing dark theme) */
-body.theme-default {
-  --bg: #0a0e1a;
-  --bg2: #0f1320;
-  --bg3: #151a2a;
-  --s1: #1a1f30;
-  --s2: #202540;
-  --s3: #2a3050;
-  --bd: rgba(30,144,255,0.12);
-  --bd2: rgba(30,144,255,0.25);
-  --a1: #1E90FF;
-  --red: #FF3333;
-  --gold: #FFD700;
-  --tx: #E8F0FF;
-  --tx2: #8AAEE0;
-  --tx3: #4A6080;
-}
-
-/* BLACK & RED DARK THEME */
-body.theme-black-red {
-  --bg: #050505;
-  --bg2: #0a0a0a;
-  --bg3: #0f0f0f;
-  --s1: #1a0a0a;
-  --s2: #2a0f0f;
-  --s3: #3a1515;
-  --bd: rgba(255,51,51,0.12);
-  --bd2: rgba(255,51,51,0.25);
-  --a1: #FF3333;
-  --red: #FF5555;
-  --gold: #FFD700;
-  --tx: #FFFFFF;
-  --tx2: #E0A0A0;
-  --tx3: #805050;
-}
-
-/* BLACK & DARK BLUE THEME */
-body.theme-black-blue {
-  --bg: #05050A;
-  --bg2: #0A0A15;
-  --bg3: #0F0F20;
-  --s1: #0A1030;
-  --s2: #0F1845;
-  --s3: #15205A;
-  --bd: rgba(0,100,255,0.12);
-  --bd2: rgba(0,100,255,0.25);
-  --a1: #0066FF;
-  --red: #FF4444;
-  --gold: #FFD700;
-  --tx: #E8F0FF;
-  --tx2: #88AADD;
-  --tx3: #445588;
-}
-
-/* BLACK & LIME DARK THEME */
-body.theme-black-lime {
-  --bg: #050500;
-  --bg2: #0A0A05;
-  --bg3: #0F0F0A;
-  --s1: #0A1A0A;
-  --s2: #0F2A0F;
-  --s3: #153A15;
-  --bd: rgba(50,255,50,0.12);
-  --bd2: rgba(50,255,50,0.25);
-  --a1: #32FF32;
-  --red: #FF5555;
-  --gold: #FFD700;
-  --tx: #E8FFE8;
-  --tx2: #A0E0A0;
-  --tx3: #508050;
-}
-
-/* LIGHT RED THEME */
-body.theme-light-red {
-  --bg: #FFF5F5;
-  --bg2: #FFEBEB;
-  --bg3: #FFE0E0;
-  --s1: #FFD6D6;
-  --s2: #FFC4C4;
-  --s3: #FFB0B0;
-  --bd: rgba(255,51,51,0.15);
-  --bd2: rgba(255,51,51,0.3);
-  --a1: #DC2626;
-  --red: #DC2626;
-  --gold: #EAB308;
-  --tx: #1F2937;
-  --tx2: #6B7280;
-  --tx3: #9CA3AF;
-}
-
-/* LIGHT GREEN THEME */
-body.theme-light-green {
-  --bg: #F0FDF4;
-  --bg2: #DCFCE7;
-  --bg3: #BBF7D0;
-  --s1: #A7F3D0;
-  --s2: #86EFAC;
-  --s3: #4ADE80;
-  --bd: rgba(34,197,94,0.15);
-  --bd2: rgba(34,197,94,0.3);
-  --a1: #16A34A;
-  --red: #EF4444;
-  --gold: #EAB308;
-  --tx: #1F2937;
-  --tx2: #6B7280;
-  --tx3: #9CA3AF;
-}
-
-/* LIGHT PINK THEME */
-body.theme-light-pink {
-  --bg: #FFF5F7;
-  --bg2: #FCE7F3;
-  --bg3: #FBCFE8;
-  --s1: #F9A8D4;
-  --s2: #F472B6;
-  --s3: #EC4899;
-  --bd: rgba(236,72,153,0.15);
-  --bd2: rgba(236,72,153,0.3);
-  --a1: #DB2777;
-  --red: #EF4444;
-  --gold: #EAB308;
-  --tx: #1F2937;
-  --tx2: #6B7280;
-  --tx3: #9CA3AF;
-}
-
-/* LIGHT BLUE THEME */
-body.theme-light-blue {
-  --bg: #EFF6FF;
-  --bg2: #DBEAFE;
-  --bg3: #BFDBFE;
-  --s1: #93C5FD;
-  --s2: #60A5FA;
-  --s3: #3B82F6;
-  --bd: rgba(59,130,246,0.15);
-  --bd2: rgba(59,130,246,0.3);
-  --a1: #2563EB;
-  --red: #EF4444;
-  --gold: #EAB308;
-  --tx: #1F2937;
-  --tx2: #6B7280;
-  --tx3: #9CA3AF;
-}
-
-/* LIGHT PURPLE THEME */
-body.theme-light-purple {
-  --bg: #FAF5FF;
-  --bg2: #F3E8FF;
-  --bg3: #E9D5FF;
-  --s1: #D8B4FE;
-  --s2: #C084FC;
-  --s3: #A855F7;
-  --bd: rgba(168,85,247,0.15);
-  --bd2: rgba(168,85,247,0.3);
-  --a1: #9333EA;
-  --red: #EF4444;
-  --gold: #EAB308;
-  --tx: #1F2937;
-  --tx2: #6B7280;
-  --tx3: #9CA3AF;
-}
-
-/* LIGHT YELLOW THEME */
-body.theme-light-yellow {
-  --bg: #FEFCE8;
-  --bg2: #FEF08A;
-  --bg3: #FDE047;
-  --s1: #FACC15;
-  --s2: #EAB308;
-  --s3: #CA8A04;
-  --bd: rgba(234,179,8,0.2);
-  --bd2: rgba(234,179,8,0.35);
-  --a1: #A16207;
-  --red: #EF4444;
-  --gold: #D97706;
-  --tx: #1F2937;
-  --tx2: #6B7280;
-  --tx3: #9CA3AF;
-}
-
-/* Smooth transition for theme switching */
-body {
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-/* Theme Toggle Button in Header */
-.theme-toggle-btn {
-  background: var(--s2);
-  border: 1px solid var(--bd2);
-  border-radius: 20px;
-  padding: 6px 10px;
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition: all 0.2s;
-}
-.theme-toggle-btn:hover {
-  background: var(--s3);
-  border-color: var(--a1);
-}
-
-/* Profile Picture Styles */
-.profile-pic {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: linear-gradient(135deg, var(--a1), var(--a3));
-  cursor: pointer;
-  border: 2px solid var(--bd2);
-  transition: all 0.2s;
-}
-.profile-pic:hover {
-  transform: scale(1.05);
-  border-color: var(--a1);
-}
-.profile-pic-placeholder {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--a1), var(--a3));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 700;
-  color: white;
-  cursor: pointer;
-  border: 2px solid var(--bd2);
-}
-.profile-pic-large {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 0 auto 10px;
-  display: block;
-  border: 3px solid var(--a1);
-  cursor: pointer;
-}
-
 </style>
 </head>
 <body>
@@ -768,272 +466,6 @@ localStorage.clear = function() {
 };
 
 console.log('✅ App isolated with ID:', APP_UNIQUE_ID);
-
-
-
-// ============================================================
-// THEME SYSTEM
-// ============================================================
-
-const THEMES = [
-  { id: 'default', name: 'Default Dark', icon: '🌙', group: 'dark' },
-  { id: 'black-red', name: 'Black & Red', icon: '🔥', group: 'dark' },
-  { id: 'black-blue', name: 'Black & Blue', icon: '💙', group: 'dark' },
-  { id: 'black-lime', name: 'Black & Lime', icon: '💚', group: 'dark' },
-  { id: 'light-red', name: 'Light Red', icon: '🔴', group: 'light' },
-  { id: 'light-green', name: 'Light Green', icon: '🟢', group: 'light' },
-  { id: 'light-pink', name: 'Light Pink', icon: '🌸', group: 'light' },
-  { id: 'light-blue', name: 'Light Blue', icon: '🔵', group: 'light' },
-  { id: 'light-purple', name: 'Light Purple', icon: '🟣', group: 'light' },
-  { id: 'light-yellow', name: 'Light Yellow', icon: '⭐', group: 'light' }
-];
-
-// Get saved theme
-const getSavedTheme = () => localStorage.getItem('ultron_theme') || 'default';
-
-// Apply theme to body
-const applyTheme = (themeId) => {
-  THEMES.forEach(theme => {
-    document.body.classList.remove(`theme-${theme.id}`);
-  });
-  document.body.classList.add(`theme-${themeId}`);
-  localStorage.setItem('ultron_theme', themeId);
-};
-
-// Get theme selector HTML
-const getThemeSelectorHTML = () => {
-  const currentTheme = getSavedTheme();
-  return `
-    <div class="theme-switcher">
-      <div class="ctitle">🎨 Theme Selector</div>
-      <div style="font-size: 10px; color: var(--tx3); margin-bottom: 8px;">🌙 DARK THEMES</div>
-      <div class="theme-grid">
-        <div class="theme-option dark-default ${currentTheme === 'default' ? 'active' : ''}" onclick="changeTheme('default')">
-          <div style="font-size: 18px; margin-bottom: 2px;">🌙</div>
-          <div style="font-size: 9px;">Default Dark</div>
-        </div>
-        <div class="theme-option dark-red ${currentTheme === 'black-red' ? 'active' : ''}" onclick="changeTheme('black-red')">
-          <div style="font-size: 18px; margin-bottom: 2px;">🔥</div>
-          <div style="font-size: 9px;">Black & Red</div>
-        </div>
-        <div class="theme-option dark-blue ${currentTheme === 'black-blue' ? 'active' : ''}" onclick="changeTheme('black-blue')">
-          <div style="font-size: 18px; margin-bottom: 2px;">💙</div>
-          <div style="font-size: 9px;">Black & Blue</div>
-        </div>
-        <div class="theme-option dark-lime ${currentTheme === 'black-lime' ? 'active' : ''}" onclick="changeTheme('black-lime')">
-          <div style="font-size: 18px; margin-bottom: 2px;">💚</div>
-          <div style="font-size: 9px;">Black & Lime</div>
-        </div>
-      </div>
-      <div style="font-size: 10px; color: var(--tx3); margin: 12px 0 8px 0;">☀️ LIGHT THEMES</div>
-      <div class="theme-grid">
-        <div class="theme-option light-red ${currentTheme === 'light-red' ? 'active' : ''}" onclick="changeTheme('light-red')">
-          <div style="font-size: 18px; margin-bottom: 2px;">🔴</div>
-          <div style="font-size: 9px;">Light Red</div>
-        </div>
-        <div class="theme-option light-green ${currentTheme === 'light-green' ? 'active' : ''}" onclick="changeTheme('light-green')">
-          <div style="font-size: 18px; margin-bottom: 2px;">🟢</div>
-          <div style="font-size: 9px;">Light Green</div>
-        </div>
-        <div class="theme-option light-pink ${currentTheme === 'light-pink' ? 'active' : ''}" onclick="changeTheme('light-pink')">
-          <div style="font-size: 18px; margin-bottom: 2px;">🌸</div>
-          <div style="font-size: 9px;">Light Pink</div>
-        </div>
-        <div class="theme-option light-blue ${currentTheme === 'light-blue' ? 'active' : ''}" onclick="changeTheme('light-blue')">
-          <div style="font-size: 18px; margin-bottom: 2px;">🔵</div>
-          <div style="font-size: 9px;">Light Blue</div>
-        </div>
-        <div class="theme-option light-purple ${currentTheme === 'light-purple' ? 'active' : ''}" onclick="changeTheme('light-purple')">
-          <div style="font-size: 18px; margin-bottom: 2px;">🟣</div>
-          <div style="font-size: 9px;">Light Purple</div>
-        </div>
-        <div class="theme-option light-yellow ${currentTheme === 'light-yellow' ? 'active' : ''}" onclick="changeTheme('light-yellow')">
-          <div style="font-size: 18px; margin-bottom: 2px;">⭐</div>
-          <div style="font-size: 9px;">Light Yellow</div>
-        </div>
-      </div>
-    </div>
-  `;
-};
-
-// Change theme function
-window.changeTheme = (themeId) => {
-  applyTheme(themeId);
-  if (currentUser && currentView === 'settings') {
-    renderSettings();
-  }
-  showMsg(`Theme changed to ${THEMES.find(t => t.id === themeId)?.name}`, 'success');
-};
-
-// Quick theme menu in top bar
-// Quick theme menu in top bar (mobile friendly)
-const showQuickThemeMenu = () => {
-  const currentTheme = getSavedTheme();
-  const themesList = THEMES;
-  
-  // Check if on mobile
-  const isMobile = window.innerWidth <= 600;
-  
-  let menuHtml = `
-    <div style="position:fixed;top:55px;right:8px;background:var(--s1);border:1px solid var(--bd2);border-radius:12px;padding:8px;z-index:1000;min-width:150px;max-width:220px;max-height:70vh;overflow-y:auto;box-shadow:0 4px 20px rgba(0,0,0,0.3);">
-      <div style="padding:6px 10px;font-size:11px;font-weight:700;color:var(--tx3);border-bottom:1px solid var(--bd);margin-bottom:6px;">🎨 Quick Theme</div>
-  `;
-  
-  // Split into two columns on mobile for better fit
-  if (isMobile) {
-    // Two column layout for mobile
-    menuHtml += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">`;
-    themesList.forEach(theme => {
-      menuHtml += `
-        <div style="padding:6px 8px;cursor:pointer;border-radius:8px;display:flex;align-items:center;gap:6px;${currentTheme === theme.id ? 'background:rgba(30,144,255,0.1);color:var(--a1);' : 'color:var(--tx2);'}" 
-             onclick="changeTheme('${theme.id}'); document.querySelector('.quick-theme-menu')?.remove();">
-          <span style="font-size:14px;">${theme.icon}</span>
-          <span style="font-size:10px;">${theme.name.replace('Light ', 'L-').replace('Black & ', '')}</span>
-        </div>
-      `;
-    });
-    menuHtml += `</div>`;
-  } else {
-    // Single column for desktop
-    themesList.forEach(theme => {
-      menuHtml += `
-        <div style="padding:8px 12px;cursor:pointer;border-radius:8px;margin:2px 0;display:flex;align-items:center;gap:8px;${currentTheme === theme.id ? 'background:rgba(30,144,255,0.1);color:var(--a1);' : 'color:var(--tx2);'}" 
-             onclick="changeTheme('${theme.id}'); document.querySelector('.quick-theme-menu')?.remove();">
-          <span>${theme.icon}</span>
-          <span style="font-size:12px;">${theme.name}</span>
-          ${currentTheme === theme.id ? '<span style="margin-left:auto;">✓</span>' : ''}
-        </div>
-      `;
-    });
-  }
-  
-  menuHtml += `</div>`;
-  
-  // Remove existing menu if any
-  const existing = document.querySelector('.quick-theme-menu');
-  if (existing) existing.remove();
-  
-  const menuDiv = document.createElement('div');
-  menuDiv.className = 'quick-theme-menu';
-  menuDiv.innerHTML = menuHtml;
-  document.body.appendChild(menuDiv);
-  
-  // Close when tapping outside
-  setTimeout(() => {
-    const closeMenu = (e) => {
-      if (!menuDiv.contains(e.target) && !e.target.classList.contains('theme-toggle-btn')) {
-        menuDiv.remove();
-        document.removeEventListener('click', closeMenu);
-        document.removeEventListener('touchstart', closeMenu);
-      }
-    };
-    document.addEventListener('click', closeMenu);
-    document.addEventListener('touchstart', closeMenu);
-  }, 10);
-};
-// Apply saved theme on load
-applyTheme(getSavedTheme());
-
-
-// ============================================================
-// PROFILE PICTURE SYSTEM
-// ============================================================
-
-// Save profile picture to localStorage
-const saveProfilePicture = (imageDataUrl) => {
-  if (!currentUser) return;
-  localStorage.setItem(`ultron_avatar_${currentUser.username}`, imageDataUrl);
-};
-
-// Load profile picture
-const getProfilePicture = () => {
-  if (!currentUser) return null;
-  return localStorage.getItem(`ultron_avatar_${currentUser.username}`);
-};
-
-// Open profile picture modal
-const openProfilePicModal = () => {
-  const currentPic = getProfilePicture();
-  const el = document.createElement('div');
-  el.className = 'modal-overlay';
-  el.innerHTML = `
-    <div class="modal-content" style="text-align:center;">
-      <div class="modal-title">📸 Profile Picture</div>
-      <div class="modal-sub">Upload a photo or choose an avatar</div>
-      ${currentPic ? `<img src="${currentPic}" class="profile-pic-large" id="currentProfilePicPreview" style="width:100px;height:100px;border-radius:50%;object-fit:cover;margin:0 auto 15px;display:block;">` : '<div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--a1),var(--a3));margin:0 auto 15px;display:flex;align-items:center;justify-content:center;font-size:40px;">👤</div>'}
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <button class="btn btn-p" onclick="uploadProfilePicture()">📷 Upload Photo</button>
-        <button class="btn btn-gh" onclick="removeProfilePicture()">🗑️ Remove Picture</button>
-        <button class="btn btn-gh" onclick="this.closest('.modal-overlay').remove()">Close</button>
-      </div>
-      <input type="file" id="profilePicInput" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="handleProfilePicUpload(event)">
-    </div>
-  `;
-  document.body.appendChild(el);
-};
-
-// Handle profile picture upload
-const handleProfilePicUpload = (event) => {
-  const file = event.target.files[0];
-  if (!file) return;
-  
-  if (!file.type.startsWith('image/')) {
-    showMsg('Please select an image file', 'error');
-    return;
-  }
-  
-  // Resize image before saving
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const size = 150;
-      canvas.width = size;
-      canvas.height = size;
-      const ctx = canvas.getContext('2d');
-      
-      // Calculate crop to make square
-      const minDim = Math.min(img.width, img.height);
-      const offsetX = (img.width - minDim) / 2;
-      const offsetY = (img.height - minDim) / 2;
-      
-      ctx.drawImage(img, offsetX, offsetY, minDim, minDim, 0, 0, size, size);
-      const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
-      
-      saveProfilePicture(dataUrl);
-      document.querySelector('.modal-overlay')?.remove();
-      renderApp(); // Refresh to show new avatar
-      showMsg('Profile picture updated!', 'success');
-    };
-    img.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
-};
-
-// Remove profile picture
-const removeProfilePicture = () => {
-  if (!confirm('Remove your profile picture?')) return;
-  localStorage.removeItem(`ultron_avatar_${currentUser.username}`);
-  document.querySelector('.modal-overlay')?.remove();
-  renderApp();
-  showMsg('Profile picture removed', 'success');
-};
-
-// Upload trigger
-const uploadProfilePicture = () => {
-  document.getElementById('profilePicInput')?.click();
-};
-
-// Get profile picture HTML for top bar
-const getProfilePictureHTML = () => {
-  const pic = getProfilePicture();
-  if (pic) {
-    return `<img src="${pic}" class="profile-pic" onclick="openProfilePicModal()" title="Change profile picture">`;
-  } else {
-    return `<div class="profile-pic-placeholder" onclick="openProfilePicModal()" title="Add profile picture">${getInit(currentUser.username)}</div>`;
-  }
-};
 
 // ============================================================
 // CONFIGURATION
@@ -1087,8 +519,8 @@ const DEFAULT_TOKEN_LIMITS = {
 // STATE
 // ============================================================
 let appVersion = {
-  current: '1.1',
-  latest: '1.1',
+  current: '1.2',
+  latest: '1.2',
   downloadLink: '',
   updateAvailable: false
 };
@@ -3846,33 +3278,14 @@ const initPullToRefresh = () => {
 // JOURNAL FUNCTIONS (all users can access - no VIP block)
 // ============================================================
 const showCreateJournalModal = () => {
-  const today = new Date().toISOString().split('T')[0];
-  
   const el = document.createElement('div');
   el.className = 'modal-overlay';
   el.innerHTML = `
     <div class="modal-content">
       <div class="modal-title">📔 Create New Journal</div>
-      <div class="modal-sub">Give your journal a name</div>
-      
+      <div class="modal-sub">Name your journal (e.g., "March 15, 2025" or "EURUSD Strategy")</div>
       <label>Journal Name</label>
-      <div style="display:flex; gap:8px; align-items:center;">
-        <input type="text" id="newJournalName" placeholder="e.g., March 15, 2025 or EURUSD Strategy" autocomplete="off" style="flex:1;">
-        <button type="button" class="btn btn-gh" style="padding:8px 12px;" onclick="toggleDatePicker()" title="Use date as name">📅</button>
-      </div>
-      
-      <div id="datePickerSection" style="display:none; margin-top:12px; padding:12px; background:var(--bg3); border-radius:10px;">
-        <label>📆 Select Date</label>
-        <input type="date" id="journalDate" value="${today}" style="margin-bottom:10px;">
-        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-          <button type="button" class="btn btn-sm btn-gh" onclick="setQuickDate(0)">Today</button>
-          <button type="button" class="btn btn-sm btn-gh" onclick="setQuickDate(-1)">Yesterday</button>
-          <button type="button" class="btn btn-sm btn-gh" onclick="setQuickDate(-7)">7 Days Ago</button>
-          <button type="button" class="btn btn-sm btn-gh" onclick="setQuickDate(-30)">30 Days Ago</button>
-        </div>
-        <button class="btn btn-p btn-sm" style="width:100%;" onclick="applyDateToName()">📅 Use This Date as Name</button>
-      </div>
-      
+      <input type="text" id="newJournalName" placeholder="e.g., 2025-03-15 - London Session" autocomplete="off">
       <div id="newJournalMsg"></div>
       <div class="modal-buttons">
         <button class="btn btn-p" onclick="createNewJournal()">Create Journal</button>
@@ -3883,72 +3296,18 @@ const showCreateJournalModal = () => {
   document.body.appendChild(el);
 };
 
-// Toggle date picker visibility
-window.toggleDatePicker = () => {
-  const section = document.getElementById('datePickerSection');
-  if (section) {
-    section.style.display = section.style.display === 'none' ? 'block' : 'none';
-  }
-};
-
-// Set quick date
-window.setQuickDate = (daysOffset) => {
-  const date = new Date();
-  date.setDate(date.getDate() + daysOffset);
-  const dateInput = document.getElementById('journalDate');
-  if (dateInput) {
-    dateInput.value = date.toISOString().split('T')[0];
-  }
-};
-
-// Apply selected date to the journal name field
-window.applyDateToName = () => {
-  const dateValue = document.getElementById('journalDate')?.value;
-  if (!dateValue) {
-    showMsg('Please select a date first', 'error');
-    return;
-  }
-  
-  const selectedDate = new Date(dateValue);
-  const formattedDate = selectedDate.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-  
-  const nameInput = document.getElementById('newJournalName');
-  if (nameInput) {
-    nameInput.value = `${formattedDate} - Trading Journal`;
-  }
-  
-  // Hide the date picker section after applying
-  const section = document.getElementById('datePickerSection');
-  if (section) {
-    section.style.display = 'none';
-  }
-  
-  showMsg(`Date set as journal name!`, 'success');
-};
-
-// Keep your original createNewJournal function
 const createNewJournal = async () => {
   const name = document.getElementById('newJournalName')?.value.trim();
   if (!name) {
     document.getElementById('newJournalMsg').innerHTML = '<div class="al al-e">Journal name required</div>';
     return;
   }
-  
-  // Get date if date picker was used
-  const dateValue = document.getElementById('journalDate')?.value;
-  
   const newJournal = {
     username: currentUser.username,
     name: name,
     created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-    journal_date: dateValue || null  // Store date if selected
+    updated_at: new Date().toISOString()
   };
-  
   const ok = await addJournal(newJournal);
   if (ok) {
     document.querySelector('.modal-overlay')?.remove();
@@ -3959,6 +3318,7 @@ const createNewJournal = async () => {
     document.getElementById('newJournalMsg').innerHTML = '<div class="al al-e">Error creating journal</div>';
   }
 };
+
 const showEditJournalModal = (journalId, currentName) => {
   const el = document.createElement('div');
   el.className = 'modal-overlay';
@@ -4014,57 +3374,31 @@ const showAddTradeModal = (journalId) => {
     <div class="modal-content" style="max-width:500px;max-height:85vh;overflow-y:auto;">
       <div class="modal-title">➕ Add Trade Setup</div>
       <div class="modal-sub">Record your trade details</div>
-      
       <label>Trade Title / Pair</label>
       <input type="text" id="tradeTitle" placeholder="e.g., EUR/USD - London Breakout" autocomplete="off">
-      
-      <label>Entry Type</label>
-      <select id="tradeEntryType" onchange="toggleLayeredEntries()">
-        <option value="single">🎯 Single Entry</option>
-        <option value="layered">📊 Layered Entries (DCA / Scaling)</option>
+      <label>Direction</label>
+      <select id="tradeDirection">
+        <option value="BUY">📈 BUY (Long)</option>
+        <option value="SELL">📉 SELL (Short)</option>
       </select>
-      
-      <div id="singleEntrySection">
-        <label>Direction</label>
-        <select id="tradeDirection">
-          <option value="BUY">📈 BUY (Long)</option>
-          <option value="SELL">📉 SELL (Short)</option>
-        </select>
-        <label>Entry Price</label>
-        <input type="number" id="tradeEntry" step="0.00001" placeholder="e.g., 1.08500">
-        <label>Stop Loss</label>
-        <input type="number" id="tradeSL" step="0.00001" placeholder="e.g., 1.08200">
-        <label>Take Profit</label>
-        <input type="number" id="tradeTP" step="0.00001" placeholder="e.g., 1.09100">
-        <label>Lot Size</label>
-        <input type="number" id="tradeLots" step="0.01" placeholder="e.g., 0.1">
-      </div>
-      
-      <div id="layeredEntrySection" style="display:none;">
-        <div style="background:var(--bg3);border-radius:10px;padding:10px;margin-bottom:10px;">
-          <div style="font-size:11px;color:var(--tx2);margin-bottom:8px;">📊 Add multiple entry layers (Dollar Cost Averaging / Scaling)</div>
-          <div id="layersContainer"></div>
-          <button type="button" class="btn btn-sm btn-gh" style="margin-top:8px;width:100%;" onclick="addLayer()">+ Add Layer</button>
-        </div>
-        <label>Overall Stop Loss (Optional - applied to all layers)</label>
-        <input type="number" id="tradeOverallSL" step="0.00001" placeholder="e.g., 1.08000">
-        <label>Overall Take Profit (Optional - applied to all layers)</label>
-        <input type="number" id="tradeOverallTP" step="0.00001" placeholder="e.g., 1.09500">
-      </div>
-      
+      <label>Entry Price</label>
+      <input type="number" id="tradeEntry" step="0.00001" placeholder="e.g., 1.08500">
+      <label>Stop Loss</label>
+      <input type="number" id="tradeSL" step="0.00001" placeholder="e.g., 1.08200">
+      <label>Take Profit</label>
+      <input type="number" id="tradeTP" step="0.00001" placeholder="e.g., 1.09100">
+      <label>Lot Size</label>
+      <input type="number" id="tradeLots" step="0.01" placeholder="e.g., 0.1">
       <label>Profit/Loss (R)</label>
       <input type="number" id="tradePnL" step="0.01" placeholder="e.g., 150.00 or -50.00">
-      
       <label>Outcome</label>
       <select id="tradeOutcome">
         <option value="OPEN">⏳ Open</option>
         <option value="WIN">✅ Win</option>
         <option value="LOSS">❌ Loss</option>
       </select>
-      
       <label>Notes (Setup reasoning, emotions, lessons)</label>
       <textarea id="tradeNotes" rows="3" placeholder="Describe your trade setup, what you saw, and any lessons..."></textarea>
-      
       <div id="addTradeMsg"></div>
       <div class="modal-buttons">
         <button class="btn btn-p" onclick="saveNewTrade('${journalId}')">Save Trade</button>
@@ -4073,70 +3407,6 @@ const showAddTradeModal = (journalId) => {
     </div>
   `;
   document.body.appendChild(el);
-  
-  // Initialize with one layer
-  if (typeof layersCount === 'undefined') window.layersCount = 0;
-  addLayer();
-};
-
-// Global function to toggle layered entries
-window.toggleLayeredEntries = () => {
-  const type = document.getElementById('tradeEntryType')?.value;
-  const singleSection = document.getElementById('singleEntrySection');
-  const layeredSection = document.getElementById('layeredEntrySection');
-  
-  if (type === 'layered') {
-    if (singleSection) singleSection.style.display = 'none';
-    if (layeredSection) layeredSection.style.display = 'block';
-  } else {
-    if (singleSection) singleSection.style.display = 'block';
-    if (layeredSection) layeredSection.style.display = 'none';
-  }
-};
-
-// Global function to add a layer
-window.addLayer = () => {
-  const container = document.getElementById('layersContainer');
-  if (!container) return;
-  
-  const layerNum = container.children.length + 1;
-  const layerDiv = document.createElement('div');
-  layerDiv.className = 'layer-entry';
-  layerDiv.style.cssText = 'background:var(--s2);border-radius:8px;padding:10px;margin-bottom:8px;position:relative;';
-  layerDiv.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <span style="font-size:11px;font-weight:700;color:var(--a1);">Layer ${layerNum}</span>
-      <button type="button" class="btn btn-sm btn-d" style="padding:2px 6px;font-size:10px;" onclick="this.parentElement.parentElement.remove(); updateLayerNumbers()">✕</button>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-      <div>
-        <label style="font-size:10px;">Entry Price</label>
-        <input type="number" step="0.00001" class="layer-entry-price" placeholder="e.g., 1.08500" style="font-size:12px;padding:6px;">
-      </div>
-      <div>
-        <label style="font-size:10px;">Lot Size</label>
-        <input type="number" step="0.01" class="layer-lot-size" placeholder="e.g., 0.1" style="font-size:12px;padding:6px;">
-      </div>
-      <div>
-        <label style="font-size:10px;">Stop Loss (optional)</label>
-        <input type="number" step="0.00001" class="layer-sl" placeholder="e.g., 1.08200" style="font-size:12px;padding:6px;">
-      </div>
-      <div>
-        <label style="font-size:10px;">Take Profit (optional)</label>
-        <input type="number" step="0.00001" class="layer-tp" placeholder="e.g., 1.09100" style="font-size:12px;padding:6px;">
-      </div>
-    </div>
-  `;
-  container.appendChild(layerDiv);
-};
-
-// Update layer numbers after deletion
-window.updateLayerNumbers = () => {
-  const layers = document.querySelectorAll('.layer-entry');
-  layers.forEach((layer, idx) => {
-    const header = layer.querySelector('div:first-child span');
-    if (header) header.textContent = `Layer ${idx + 1}`;
-  });
 };
 
 const saveNewTrade = async (journalId) => {
@@ -4145,67 +3415,19 @@ const saveNewTrade = async (journalId) => {
     document.getElementById('addTradeMsg').innerHTML = '<div class="al al-e">Trade title required</div>';
     return;
   }
-  
-  const entryType = document.getElementById('tradeEntryType')?.value;
-  let layeredEntries = null;
-  let tradeData = {};
-  
-  if (entryType === 'layered') {
-    // Collect all layers
-    const layers = [];
-    const layerDivs = document.querySelectorAll('.layer-entry');
-    
-    for (const layerDiv of layerDivs) {
-      const entryPrice = parseFloat(layerDiv.querySelector('.layer-entry-price')?.value);
-      const lotSize = parseFloat(layerDiv.querySelector('.layer-lot-size')?.value);
-      if (entryPrice && lotSize) {
-        layers.push({
-          entry_price: entryPrice,
-          lot_size: lotSize,
-          stop_loss: parseFloat(layerDiv.querySelector('.layer-sl')?.value) || null,
-          take_profit: parseFloat(layerDiv.querySelector('.layer-tp')?.value) || null
-        });
-      }
-    }
-    
-    if (layers.length === 0) {
-      document.getElementById('addTradeMsg').innerHTML = '<div class="al al-e">Add at least one layer with entry price and lot size</div>';
-      return;
-    }
-    
-    layeredEntries = JSON.stringify(layers);
-    const overallSL = parseFloat(document.getElementById('tradeOverallSL')?.value) || null;
-    const overallTP = parseFloat(document.getElementById('tradeOverallTP')?.value) || null;
-    
-    tradeData = {
-      folder_id: journalId,
-      title: title,
-      direction: 'LAYERED',
-      layered_entries: layeredEntries,
-      stop_loss: overallSL,
-      take_profit: overallTP,
-      profit_loss: parseFloat(document.getElementById('tradePnL')?.value) || null,
-      outcome: document.getElementById('tradeOutcome')?.value || 'OPEN',
-      notes: document.getElementById('tradeNotes')?.value.trim() || null,
-      trade_date: new Date().toISOString().split('T')[0]
-    };
-  } else {
-    // Single entry
-    tradeData = {
-      folder_id: journalId,
-      title: title,
-      direction: document.getElementById('tradeDirection')?.value,
-      entry_price: parseFloat(document.getElementById('tradeEntry')?.value) || null,
-      stop_loss: parseFloat(document.getElementById('tradeSL')?.value) || null,
-      take_profit: parseFloat(document.getElementById('tradeTP')?.value) || null,
-      lot_size: parseFloat(document.getElementById('tradeLots')?.value) || null,
-      profit_loss: parseFloat(document.getElementById('tradePnL')?.value) || null,
-      outcome: document.getElementById('tradeOutcome')?.value || 'OPEN',
-      notes: document.getElementById('tradeNotes')?.value.trim() || null,
-      trade_date: new Date().toISOString().split('T')[0]
-    };
-  }
-  
+  const tradeData = {
+    folder_id: journalId,
+    title: title,
+    direction: document.getElementById('tradeDirection')?.value,
+    entry_price: parseFloat(document.getElementById('tradeEntry')?.value) || null,
+    stop_loss: parseFloat(document.getElementById('tradeSL')?.value) || null,
+    take_profit: parseFloat(document.getElementById('tradeTP')?.value) || null,
+    lot_size: parseFloat(document.getElementById('tradeLots')?.value) || null,
+    profit_loss: parseFloat(document.getElementById('tradePnL')?.value) || null,
+    outcome: document.getElementById('tradeOutcome')?.value || 'OPEN',
+    notes: document.getElementById('tradeNotes')?.value.trim() || null,
+    trade_date: new Date().toISOString().split('T')[0]
+  };
   const ok = await addJournalTrade(tradeData);
   if (ok) {
     document.querySelector('.modal-overlay')?.remove();
@@ -4218,86 +3440,42 @@ const saveNewTrade = async (journalId) => {
 
 const showEditTradeModal = async (tradeId, journalId) => {
   const trades = await loadJournalTrades(journalId);
-  const trade = trades.find(t => t.id == tradeId);
-  if (!trade) {
-    showMsg('Trade not found', 'error');
-    return;
-  }
-  
-  // Check if this is a layered trade
-  let layeredEntries = [];
-  let isLayered = false;
-  try {
-    if (trade.layered_entries) {
-      layeredEntries = JSON.parse(trade.layered_entries);
-      isLayered = layeredEntries.length > 0;
-    }
-  } catch(e) {}
+  const trade = trades.find(t => t.id === tradeId);
+  if (!trade) return;
   
   const el = document.createElement('div');
   el.className = 'modal-overlay';
   el.innerHTML = `
     <div class="modal-content" style="max-width:500px;max-height:85vh;overflow-y:auto;">
       <div class="modal-title">✏️ Edit Trade</div>
-      <div class="modal-sub">Update your trade details</div>
-      
-      <label>Trade Title / Pair</label>
-      <input type="text" id="editTradeTitle" value="${esc(trade.title)}" placeholder="e.g., EUR/USD - London Breakout">
-      
-      ${!isLayered ? `
-        <label>Direction</label>
-        <select id="editTradeDirection">
-          <option value="BUY" ${trade.direction === 'BUY' ? 'selected' : ''}>📈 BUY (Long)</option>
-          <option value="SELL" ${trade.direction === 'SELL' ? 'selected' : ''}>📉 SELL (Short)</option>
-        </select>
-        <label>Entry Price</label>
-        <input type="number" id="editTradeEntry" step="0.00001" value="${trade.entry_price || ''}" placeholder="e.g., 1.08500">
-        <label>Stop Loss</label>
-        <input type="number" id="editTradeSL" step="0.00001" value="${trade.stop_loss || ''}" placeholder="e.g., 1.08200">
-        <label>Take Profit</label>
-        <input type="number" id="editTradeTP" step="0.00001" value="${trade.take_profit || ''}" placeholder="e.g., 1.09100">
-        <label>Lot Size</label>
-        <input type="number" id="editTradeLots" step="0.01" value="${trade.lot_size || ''}" placeholder="e.g., 0.1">
-      ` : `
-        <div style="background:var(--bg3);border-radius:10px;padding:10px;margin-bottom:10px;">
-          <div style="font-size:11px;color:var(--tx2);margin-bottom:8px;">📊 Layered Entries</div>
-          <div id="editLayersContainer">
-            ${layeredEntries.map((layer, idx) => `
-              <div class="edit-layer-entry" style="background:var(--s2);border-radius:8px;padding:10px;margin-bottom:8px;">
-                <div style="font-size:11px;font-weight:700;color:var(--a1);margin-bottom:6px;">Layer ${idx + 1}</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-                  <div><label style="font-size:10px;">Entry Price</label><input type="number" step="0.00001" class="edit-layer-entry-price" value="${layer.entry_price}" style="font-size:12px;padding:6px;"></div>
-                  <div><label style="font-size:10px;">Lot Size</label><input type="number" step="0.01" class="edit-layer-lot-size" value="${layer.lot_size}" style="font-size:12px;padding:6px;"></div>
-                  <div><label style="font-size:10px;">Stop Loss</label><input type="number" step="0.00001" class="edit-layer-sl" value="${layer.stop_loss || ''}" style="font-size:12px;padding:6px;"></div>
-                  <div><label style="font-size:10px;">Take Profit</label><input type="number" step="0.00001" class="edit-layer-tp" value="${layer.take_profit || ''}" style="font-size:12px;padding:6px;"></div>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-          <button type="button" class="btn btn-sm btn-gh" style="margin-top:8px;width:100%;" onclick="addEditLayer()">+ Add Layer</button>
-        </div>
-        <label>Overall Stop Loss (Optional)</label>
-        <input type="number" id="editTradeOverallSL" step="0.00001" value="${trade.stop_loss || ''}" placeholder="e.g., 1.08000">
-        <label>Overall Take Profit (Optional)</label>
-        <input type="number" id="editTradeOverallTP" step="0.00001" value="${trade.take_profit || ''}" placeholder="e.g., 1.09500">
-      `}
-      
-      <label>Profit/Loss (R)</label>
-      <input type="number" id="editTradePnL" step="0.01" value="${trade.profit_loss || ''}" placeholder="e.g., 150.00 or -50.00">
-      
+      <label>Trade Title</label>
+      <input type="text" id="editTradeTitle" value="${esc(trade.title)}">
+      <label>Direction</label>
+      <select id="editTradeDirection">
+        <option value="BUY" ${trade.direction === 'BUY' ? 'selected' : ''}>📈 BUY</option>
+        <option value="SELL" ${trade.direction === 'SELL' ? 'selected' : ''}>📉 SELL</option>
+      </select>
+      <label>Entry Price</label>
+      <input type="number" id="editTradeEntry" step="0.00001" value="${trade.entry_price || ''}">
+      <label>Stop Loss</label>
+      <input type="number" id="editTradeSL" step="0.00001" value="${trade.stop_loss || ''}">
+      <label>Take Profit</label>
+      <input type="number" id="editTradeTP" step="0.00001" value="${trade.take_profit || ''}">
+      <label>Lot Size</label>
+      <input type="number" id="editTradeLots" step="0.01" value="${trade.lot_size || ''}">
+      <label>P&L (R)</label>
+      <input type="number" id="editTradePnL" step="0.01" value="${trade.profit_loss || ''}">
       <label>Outcome</label>
       <select id="editTradeOutcome">
         <option value="OPEN" ${trade.outcome === 'OPEN' ? 'selected' : ''}>⏳ Open</option>
         <option value="WIN" ${trade.outcome === 'WIN' ? 'selected' : ''}>✅ Win</option>
         <option value="LOSS" ${trade.outcome === 'LOSS' ? 'selected' : ''}>❌ Loss</option>
       </select>
-      
       <label>Notes</label>
       <textarea id="editTradeNotes" rows="3">${esc(trade.notes || '')}</textarea>
-      
       <div id="editTradeMsg"></div>
       <div class="modal-buttons">
-        <button class="btn btn-p" onclick="updateExistingTrade('${tradeId}', '${journalId}', ${isLayered})">💾 Save Changes</button>
+        <button class="btn btn-p" onclick="updateExistingTrade('${tradeId}', '${journalId}')">Save Changes</button>
         <button class="btn btn-gh" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
       </div>
     </div>
@@ -4305,96 +3483,28 @@ const showEditTradeModal = async (tradeId, journalId) => {
   document.body.appendChild(el);
 };
 
-// Add edit layer function
-window.addEditLayer = () => {
-  const container = document.getElementById('editLayersContainer');
-  if (!container) return;
-  
-  const layerNum = container.children.length + 1;
-  const layerDiv = document.createElement('div');
-  layerDiv.className = 'edit-layer-entry';
-  layerDiv.style.cssText = 'background:var(--s2);border-radius:8px;padding:10px;margin-bottom:8px;position:relative;';
-  layerDiv.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <span style="font-size:11px;font-weight:700;color:var(--a1);">Layer ${layerNum}</span>
-      <button type="button" class="btn btn-sm btn-d" style="padding:2px 6px;font-size:10px;" onclick="this.parentElement.parentElement.remove(); updateEditLayerNumbers()">✕</button>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-      <div><label style="font-size:10px;">Entry Price</label><input type="number" step="0.00001" class="edit-layer-entry-price" style="font-size:12px;padding:6px;"></div>
-      <div><label style="font-size:10px;">Lot Size</label><input type="number" step="0.01" class="edit-layer-lot-size" style="font-size:12px;padding:6px;"></div>
-      <div><label style="font-size:10px;">Stop Loss</label><input type="number" step="0.00001" class="edit-layer-sl" style="font-size:12px;padding:6px;"></div>
-      <div><label style="font-size:10px;">Take Profit</label><input type="number" step="0.00001" class="edit-layer-tp" style="font-size:12px;padding:6px;"></div>
-    </div>
-  `;
-  container.appendChild(layerDiv);
-};
-
-window.updateEditLayerNumbers = () => {
-  const layers = document.querySelectorAll('.edit-layer-entry');
-  layers.forEach((layer, idx) => {
-    const header = layer.querySelector('div:first-child span');
-    if (header) header.textContent = `Layer ${idx + 1}`;
-  });
-
-
-};
-
-const updateExistingTrade = async (tradeId, journalId, isLayered = false) => {
+const updateExistingTrade = async (tradeId, journalId) => {
   const title = document.getElementById('editTradeTitle')?.value.trim();
   if (!title) {
     document.getElementById('editTradeMsg').innerHTML = '<div class="al al-e">Title required</div>';
     return;
   }
-  
-  let updatedTrade = {};
-  
-  if (isLayered) {
-    // Collect layers from edit form
-    const layers = [];
-    const layerDivs = document.querySelectorAll('.edit-layer-entry');
-    
-    for (const layerDiv of layerDivs) {
-      const entryPrice = parseFloat(layerDiv.querySelector('.edit-layer-entry-price')?.value);
-      const lotSize = parseFloat(layerDiv.querySelector('.edit-layer-lot-size')?.value);
-      if (entryPrice && lotSize) {
-        layers.push({
-          entry_price: entryPrice,
-          lot_size: lotSize,
-          stop_loss: parseFloat(layerDiv.querySelector('.edit-layer-sl')?.value) || null,
-          take_profit: parseFloat(layerDiv.querySelector('.edit-layer-tp')?.value) || null
-        });
-      }
-    }
-    
-    updatedTrade = {
-      title: title,
-      direction: 'LAYERED',
-      layered_entries: JSON.stringify(layers),
-      stop_loss: parseFloat(document.getElementById('editTradeOverallSL')?.value) || null,
-      take_profit: parseFloat(document.getElementById('editTradeOverallTP')?.value) || null,
-      profit_loss: parseFloat(document.getElementById('editTradePnL')?.value) || null,
-      outcome: document.getElementById('editTradeOutcome')?.value,
-      notes: document.getElementById('editTradeNotes')?.value.trim() || null
-    };
-  } else {
-    updatedTrade = {
-      title: title,
-      direction: document.getElementById('editTradeDirection')?.value,
-      entry_price: parseFloat(document.getElementById('editTradeEntry')?.value) || null,
-      stop_loss: parseFloat(document.getElementById('editTradeSL')?.value) || null,
-      take_profit: parseFloat(document.getElementById('editTradeTP')?.value) || null,
-      lot_size: parseFloat(document.getElementById('editTradeLots')?.value) || null,
-      profit_loss: parseFloat(document.getElementById('editTradePnL')?.value) || null,
-      outcome: document.getElementById('editTradeOutcome')?.value,
-      notes: document.getElementById('editTradeNotes')?.value.trim() || null
-    };
-  }
-  
+  const updatedTrade = {
+    title: title,
+    direction: document.getElementById('editTradeDirection')?.value,
+    entry_price: parseFloat(document.getElementById('editTradeEntry')?.value) || null,
+    stop_loss: parseFloat(document.getElementById('editTradeSL')?.value) || null,
+    take_profit: parseFloat(document.getElementById('editTradeTP')?.value) || null,
+    lot_size: parseFloat(document.getElementById('editTradeLots')?.value) || null,
+    profit_loss: parseFloat(document.getElementById('editTradePnL')?.value) || null,
+    outcome: document.getElementById('editTradeOutcome')?.value,
+    notes: document.getElementById('editTradeNotes')?.value.trim() || null
+  };
   const ok = await updateJournalTrade(tradeId, updatedTrade);
   if (ok) {
     document.querySelector('.modal-overlay')?.remove();
     renderJournal();
-    showMsg('Trade updated successfully!', 'success');
+    showMsg('Trade updated!', 'success');
   } else {
     document.getElementById('editTradeMsg').innerHTML = '<div class="al al-e">Error updating trade</div>';
   }
@@ -4464,69 +3574,34 @@ const renderJournal = async () => {
       
       ${trades.length === 0 ? '<div class="card" style="text-align:center;padding:40px;"><button class="btn btn-p" onclick="showAddTradeModal(\'' + selectedFolder + '\')">+ Add Your First Trade</button></div>' : ''}
       
-      ${trades.map(trade => {
-        // Parse layered entries if they exist
-        let layeredEntries = [];
-        try {
-          if (trade.layered_entries) {
-            layeredEntries = JSON.parse(trade.layered_entries);
-          }
-        } catch(e) { layeredEntries = []; }
-        
-        const hasLayers = layeredEntries.length > 0;
-        const totalSize = hasLayers ? layeredEntries.reduce((sum, e) => sum + (parseFloat(e.lot_size) || 0), 0) : (parseFloat(trade.lot_size) || 0);
-        const avgEntry = hasLayers ? (layeredEntries.reduce((sum, e) => sum + (parseFloat(e.entry_price) || 0) * (parseFloat(e.lot_size) || 0), 0) / totalSize).toFixed(5) : trade.entry_price;
-        
-        return `
-          <div class="trade-card">
-            <div class="trade-card-header">
-              <div>
-                <div class="trade-title">${esc(trade.title)}</div>
-                <div class="trade-meta">${fmtDate(trade.trade_date)}</div>
-              </div>
-              <div style="display:flex;gap:6px;align-items:center;">
-                <span class="badge ${trade.outcome === 'WIN' ? 'badge-green' : (trade.outcome === 'LOSS' ? 'badge-red' : 'badge-gold')}">${trade.outcome}</span>
-                <button class="btn btn-sm btn-gh" style="padding:4px 8px;font-size:10px;" onclick="showEditTradeModal('${trade.id}', '${selectedFolder}')">✏️</button>
-                <button class="btn btn-sm btn-d" style="padding:4px 8px;font-size:10px;" onclick="deleteTrade('${trade.id}', '${selectedFolder}')">🗑️</button>
-              </div>
+      ${trades.map(trade => `
+        <div class="trade-card">
+          <div class="trade-card-header">
+            <div>
+              <div class="trade-title">${esc(trade.title)}</div>
+              <div class="trade-meta">${fmtDate(trade.trade_date)}</div>
             </div>
-            
-            ${hasLayers ? `
-              <div style="background:rgba(30,144,255,0.08);border-radius:8px;padding:8px;margin-bottom:8px;">
-                <div style="font-size:10px;color:var(--tx3);margin-bottom:4px;">📊 LAYERED ENTRIES (${layeredEntries.length} layers)</div>
-                ${layeredEntries.map((layer, idx) => `
-                  <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid var(--bd);">
-                    <span>Layer ${idx + 1}:</span>
-                    <span>Entry: ${layer.entry_price}</span>
-                    <span>SL: ${layer.stop_loss || '—'}</span>
-                    <span>TP: ${layer.take_profit || '—'}</span>
-                    <span>Lots: ${layer.lot_size}</span>
-                  </div>
-                `).join('')}
-                <div style="display:flex;justify-content:space-between;margin-top:6px;padding-top:4px;border-top:1px solid var(--bd);font-size:11px;font-weight:700;">
-                  <span>Avg Entry: ${avgEntry}</span>
-                  <span>Total Lots: ${totalSize}</span>
-                </div>
-              </div>
-            ` : `
-              <div class="trade-details">
-                <div class="trade-detail"><span class="trade-detail-label">Direction:</span><span class="trade-detail-value" style="color:${trade.direction === 'BUY' ? 'var(--a1)' : 'var(--red)'}">${trade.direction || '—'}</span></div>
-                <div class="trade-detail"><span class="trade-detail-label">Entry:</span><span class="trade-detail-value">${trade.entry_price || '—'}</span></div>
-                <div class="trade-detail"><span class="trade-detail-label">SL:</span><span class="trade-detail-value">${trade.stop_loss || '—'}</span></div>
-                <div class="trade-detail"><span class="trade-detail-label">TP:</span><span class="trade-detail-value">${trade.take_profit || '—'}</span></div>
-                <div class="trade-detail"><span class="trade-detail-label">Lots:</span><span class="trade-detail-value">${trade.lot_size || '—'}</span></div>
-                <div class="trade-detail"><span class="trade-detail-label">P&L:</span><span class="trade-detail-value" style="color:${(trade.profit_loss || 0) >= 0 ? 'var(--a1)' : 'var(--red)'}">${(trade.profit_loss || 0) >= 0 ? '+' : ''}R${Math.abs(trade.profit_loss || 0).toFixed(2)}</span></div>
-              </div>
-            `}
-            ${trade.notes ? `<div class="trade-notes">📝 ${esc(trade.notes)}</div>` : ''}
+            <div style="display:flex;gap:6px;align-items:center;">
+              <span class="badge ${trade.outcome === 'WIN' ? 'badge-green' : (trade.outcome === 'LOSS' ? 'badge-red' : 'badge-gold')}">${trade.outcome}</span>
+              <button class="btn btn-sm btn-gh" style="padding:4px 8px;font-size:10px;" onclick="showEditTradeModal('${trade.id}', '${selectedFolder}')">✏️</button>
+              <button class="btn btn-sm btn-d" style="padding:4px 8px;font-size:10px;" onclick="deleteTrade('${trade.id}', '${selectedFolder}')">🗑️</button>
+            </div>
           </div>
-        `;
-      }).join('')}
+          <div class="trade-details">
+            <div class="trade-detail"><span class="trade-detail-label">Direction:</span><span class="trade-detail-value" style="color:${trade.direction === 'BUY' ? 'var(--a1)' : 'var(--red)'}">${trade.direction || '—'}</span></div>
+            <div class="trade-detail"><span class="trade-detail-label">Entry:</span><span class="trade-detail-value">${trade.entry_price || '—'}</span></div>
+            <div class="trade-detail"><span class="trade-detail-label">SL:</span><span class="trade-detail-value">${trade.stop_loss || '—'}</span></div>
+            <div class="trade-detail"><span class="trade-detail-label">TP:</span><span class="trade-detail-value">${trade.take_profit || '—'}</span></div>
+            <div class="trade-detail"><span class="trade-detail-label">Lots:</span><span class="trade-detail-value">${trade.lot_size || '—'}</span></div>
+            <div class="trade-detail"><span class="trade-detail-label">P&L:</span><span class="trade-detail-value" style="color:${(trade.profit_loss || 0) >= 0 ? 'var(--a1)' : 'var(--red)'}">${(trade.profit_loss || 0) >= 0 ? '+' : ''}R${Math.abs(trade.profit_loss || 0).toFixed(2)}</span></div>
+          </div>
+          ${trade.notes ? `<div class="trade-notes">📝 ${esc(trade.notes)}</div>` : ''}
+        </div>
+      `).join('')}
     `;
     return;
   }
   
-  // Rest of your code for displaying journal list (when no folder is selected)
   c.innerHTML = `
     <div class="sh">
       <div><div class="sh-t">📓 Trading Journals</div><div class="sh-s">${journals.length} journal${journals.length !== 1 ? 's' : ''}</div></div>
@@ -4543,24 +3618,19 @@ const renderJournal = async () => {
     const tradeCount = trades.length;
     const totalPnL = trades.reduce((sum, t) => sum + (parseFloat(t.profit_loss) || 0), 0);
     const wins = trades.filter(t => t.outcome === 'WIN').length;
-
-
     
     c.innerHTML += `
       <div class="journal-folder-card">
         <div class="journal-folder-header" onclick="viewJournal('${journal.id}')">
           <div class="journal-folder-icon">📔</div>
-          <div class="journal-folder-title">
-            ${esc(journal.name)}
-            ${journal.journal_date ? `<div style="font-size:10px; color:var(--tx3);">📅 ${new Date(journal.journal_date).toLocaleDateString('en-ZA')}</div>` : ''}
-          </div>
+          <div class="journal-folder-title">${esc(journal.name)}</div>
           <div class="journal-folder-stats">
             <span class="badge badge-gray">${tradeCount} trade${tradeCount !== 1 ? 's' : ''}</span>
             ${tradeCount > 0 ? `<span class="badge ${totalPnL >= 0 ? 'badge-green' : 'badge-red'}">${totalPnL >= 0 ? '+' : ''}R${Math.abs(totalPnL).toFixed(0)}</span>` : ''}
             ${wins > 0 ? `<span class="badge badge-green">${wins} wins</span>` : ''}
           </div>
           <div class="journal-folder-actions" onclick="event.stopPropagation()">
-            <button class="btn btn-sm btn-gh" style="padding:4px 8px;font-size:10px;" onclick="viewJournal('${journal.id}')">📂 Open</button>
+            <button class="btn btn-sm btn-gh" style="padding:4px 8px;font-size:10px;" onclick="showEditJournalModal('${journal.id}', '${esc(journal.name)}')">✏️</button>
             <button class="btn btn-sm btn-d" style="padding:4px 8px;font-size:10px;" onclick="deleteJournalFolder('${journal.id}')">🗑️</button>
           </div>
         </div>
@@ -4568,6 +3638,7 @@ const renderJournal = async () => {
     `;
   }
 };
+
 // ============================================================
 // RENDER FUNCTIONS (keeping all original)
 // ============================================================
@@ -4972,8 +4043,7 @@ const renderSettings = () => {
   const isAdmin = currentUser?.role === 'admin' || ADMINS.some(a => a.username === currentUser?.username);
   
   let html = '<div class="sh"><div class="sh-t">⚙️ Settings</div></div>' +
-    getThemeSelectorHTML() +   // <-- ADD THIS LINE RIGHT HERE
-    '<div class="card"><div class="ctitle">Profile</div><div style="text-align:center;margin-bottom:12px;">' + (getProfilePicture() ? '<img src="' + getProfilePicture() + '" class="profile-pic-large" style="width:80px;height:80px;cursor:pointer;" onclick="openProfilePicModal()">' : '<div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--a1),var(--a3));margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:32px;cursor:pointer;" onclick="openProfilePicModal()">👤</div>') + '<div style="font-size:11px;color:var(--tx2);margin-bottom:10px;">Tap picture to change</div></div><label>Username</label><input type="text" id="editUsername" value="' + esc(currentUser.username) + '"><label>Phone</label><input type="tel" id="editPhone" value="' + esc(currentUser.phone) + '"><button class="btn btn-p btn-w" onclick="updateProfile()">Update Profile</button></div>' +
+    '<div class="card"><div class="ctitle">Profile</div><label>Username</label><input type="text" id="editUsername" value="' + esc(currentUser.username) + '"><label>Phone</label><input type="tel" id="editPhone" value="' + esc(currentUser.phone) + '"><button class="btn btn-p btn-w" onclick="updateProfile()">Update Profile</button></div>' +
     '<div class="card"><div class="ctitle">Change Password</div><div class="pw-w"><input type="password" id="currentPassword" placeholder="Current password"><button class="eye-btn" onclick="togglePwField(\'currentPassword\')">👁️</button></div><div class="pw-w"><input type="password" id="newPassword" placeholder="New password (min 6)"><button class="eye-btn" onclick="togglePwField(\'newPassword\')">👁️</button></div><div class="pw-w"><input type="password" id="confirmPassword" placeholder="Confirm new password"><button class="eye-btn" onclick="togglePwField(\'confirmPassword\')">👁️</button></div><button class="btn btn-p btn-w" onclick="changePassword()">Change Password</button></div>';
   
   if (isAdmin) {
@@ -4992,7 +4062,6 @@ const renderSettings = () => {
   
   c.innerHTML = html;
 };
-
 
 const updateProfile = async () => {
   const newUser = document.getElementById('editUsername')?.value.trim();
@@ -6061,7 +5130,7 @@ const renderApp = () => {
   const isAdmin = currentUser?.role === 'admin';
   const v = currentView;
   document.getElementById('app').innerHTML =
-'<div class="tbw"><div class="tb"><div class="logo"><div class="logo-text" style="color:#00E5FF;text-shadow:0 0 10px rgba(0,229,255,0.5);font-size:17px;">Ultron Trading Solutions</div></div><div class="tb-r">' + getProfilePictureHTML() + '<span class="tb-name">' + esc(currentUser.username) + '</span><button class="theme-toggle-btn" onclick="showQuickThemeMenu()" title="Change Theme">🎨</button><button class="menu-btn" onclick="toggleMenu()">☰</button></div></div></div>' +
+    '<div class="tbw"><div class="tb"><div class="logo"><div class="logo-text" style="color:#00E5FF;text-shadow:0 0 10px rgba(0,229,255,0.5);font-size:17px;">Ultron Trading Solutions</div></div><div class="tb-r"><div class="av">' + getInit(currentUser.username) + '</div><span class="tb-name">' + esc(currentUser.username) + '</span><button class="menu-btn" onclick="toggleMenu()">☰</button></div></div></div>' +
     '<div id="menuOverlay" class="menu-overlay" onclick="toggleMenu()"></div>' +
     '<div id="menuPanel" class="menu-panel"><div class="menu-header"><div class="menu-user"><div class="av" style="width:40px;height:40px;">' + getInit(currentUser.username) + '</div><div><h3>' + esc(currentUser.username) + '</h3><p>' + (isAdmin ? '👑 Admin' : (currentUser.is_vip ? '⭐ VIP' : '👤 Trader')) + '</p></div></div><button class="close-btn" onclick="toggleMenu()">✕</button></div>' +
     '<div class="menu-items">' +
@@ -6442,11 +5511,6 @@ window.saveVersionConfiguration = saveVersionConfiguration;
 window.clearUpdateConfiguration = clearUpdateConfiguration;
 window.openUpdateLink = openUpdateLink;
 window.getUpdateBanner = getUpdateBanner;
-window.openProfilePicModal = openProfilePicModal;
-window.uploadProfilePicture = uploadProfilePicture;
-window.handleProfilePicUpload = handleProfilePicUpload;
-window.removeProfilePicture = removeProfilePicture;
-window.showQuickThemeMenu = showQuickThemeMenu;
 // ============================================================
 // INITIALIZE
 // ============================================================
