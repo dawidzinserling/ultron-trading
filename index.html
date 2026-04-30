@@ -518,11 +518,12 @@ const DEFAULT_TOKEN_LIMITS = {
 // ============================================================
 // STATE
 // ============================================================
+
 let appVersion = {
   current: '1.1',
-  latest: '1.2.1',
-  downloadLink: 'https://github.com/dawidzinserling/ultron-trading/releases/download/v1.2.1/Ultron_Trading.apk',
-  updateAvailable: true
+  latest: '1.1',
+  downloadLink: '',
+  updateAvailable: false
 };
 
 let shoppingCart = []; 
@@ -1941,51 +1942,46 @@ const openUpdateLink = () => {
   modal.innerHTML = `
     <div class="modal-content">
       <div class="modal-title">📱 Download Update v${appVersion.latest}</div>
-      <div class="modal-sub">APK Size: ~20-40 MB</div>
+      <div class="modal-sub" style="background:rgba(255,165,0,0.1);padding:12px;border-radius:10px;margin-bottom:12px;">
+        ⚠️ <strong>Having trouble downloading?</strong><br>
+        Tap "Copy Link", open Chrome browser, paste the link, and download there.
+      </div>
       <div style="margin: 15px 0; display: flex; flex-direction: column; gap: 10px;">
         <button class="btn btn-p" onclick="downloadApkDirectly(); this.closest('.modal-overlay').remove();">
           ⬇️ Download Now
         </button>
         <button class="btn btn-gh" onclick="copyGithubLink(); this.closest('.modal-overlay').remove();">
-          📋 Copy Download Link
+          📋 Copy Link (Recommended if download fails)
         </button>
         <button class="btn btn-gh" onclick="this.closest('.modal-overlay').remove()">
           Cancel
         </button>
       </div>
-      <div style="font-size: 11px; color: var(--tx3); text-align: center;">
-        💡 If download doesn't start, tap "Copy Link" and paste into Chrome
+      <div style="font-size: 11px; color: var(--tx3); text-align: center; margin-top: 8px;">
+        💡 Files open in browser - tap the download button there
       </div>
     </div>
   `;
   document.body.appendChild(modal);
 };
 
-// Separate function for direct download
 const downloadApkDirectly = () => {
   if (!appVersion.downloadLink) return;
   
-  // Method 1: Navigate directly (works in WebView)
-  window.location.href = appVersion.downloadLink;
+  // Just open the link - Google Drive will show the download button
+  window.open(appVersion.downloadLink, '_blank');
   
-  // Method 2: Also try opening in new window as backup
-  setTimeout(() => {
-    window.open(appVersion.downloadLink, '_blank');
-  }, 500);
-  
-  showMsg('Starting download... Check your notifications.', 'success');
+  showMsg('Opening Google Drive... Tap the download button there.', 'success');
 };
-
-// Improved copy function that shows what was copied
 const copyGithubLink = () => {
   const link = appVersion.downloadLink;
   
-  // Use modern clipboard API
+  // Try modern method first
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(link).then(() => {
-      showMsg('✅ Link copied to clipboard!\n' + link.substring(0, 60) + '...', 'success');
+      showMsg('✅ Link copied! Open Chrome, paste, and download.', 'success');
     }).catch(() => {
-      // Fallback for older browsers
+      // Fallback for when modern method fails
       fallbackCopy(link);
     });
   } else {
@@ -2002,8 +1998,9 @@ const fallbackCopy = (text) => {
   textarea.select();
   document.execCommand('copy');
   document.body.removeChild(textarea);
-  showMsg('✅ Link copied! Open Chrome and paste to download.', 'success');
+  showMsg('✅ Link copied! Open Chrome, paste, and download.', 'success');
 };
+
 const saveAppSettings = async () => {
   try {
     const check = await sbFetch('app_settings?key=eq.main&select=key', 'GET');
