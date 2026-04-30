@@ -1934,36 +1934,74 @@ const openUpdateLink = () => {
     return;
   }
   
-  // Show options dialog for better user experience
+  // Show options dialog
   const modal = document.createElement('div');
   modal.className = 'modal-overlay';
   modal.innerHTML = `
     <div class="modal-content">
-      <div class="modal-title">📱 Update Available</div>
-      <div class="modal-sub">Version ${appVersion.latest} is ready to download</div>
+      <div class="modal-title">📱 Download Update v${appVersion.latest}</div>
+      <div class="modal-sub">APK Size: ~20-40 MB</div>
       <div style="margin: 15px 0; display: flex; flex-direction: column; gap: 10px;">
-        <button class="btn btn-p" onclick="window.open('${appVersion.downloadLink}', '_blank'); this.closest('.modal-overlay').remove();">
+        <button class="btn btn-p" onclick="downloadApkDirectly(); this.closest('.modal-overlay').remove();">
           ⬇️ Download Now
         </button>
-        <button class="btn btn-gh" onclick="copyToClipboard('${appVersion.downloadLink}'); this.closest('.modal-overlay').remove();">
-          📋 Copy Link (if download fails)
+        <button class="btn btn-gh" onclick="copyGithubLink(); this.closest('.modal-overlay').remove();">
+          📋 Copy Download Link
         </button>
         <button class="btn btn-gh" onclick="this.closest('.modal-overlay').remove()">
           Cancel
         </button>
       </div>
       <div style="font-size: 11px; color: var(--tx3); text-align: center;">
-        💡 Tap Download, then tap "Allow" if prompted
+        💡 If download doesn't start, tap "Copy Link" and paste into Chrome
       </div>
     </div>
   `;
   document.body.appendChild(modal);
 };
 
-// Add this helper function if not already present
-const copyToClipboard = (text) => {
-  navigator.clipboard.writeText(text);
-  showMsg('Link copied! Open Chrome and paste to download.', 'success');
+// Separate function for direct download
+const downloadApkDirectly = () => {
+  if (!appVersion.downloadLink) return;
+  
+  // Method 1: Navigate directly (works in WebView)
+  window.location.href = appVersion.downloadLink;
+  
+  // Method 2: Also try opening in new window as backup
+  setTimeout(() => {
+    window.open(appVersion.downloadLink, '_blank');
+  }, 500);
+  
+  showMsg('Starting download... Check your notifications.', 'success');
+};
+
+// Improved copy function that shows what was copied
+const copyGithubLink = () => {
+  const link = appVersion.downloadLink;
+  
+  // Use modern clipboard API
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(link).then(() => {
+      showMsg('✅ Link copied to clipboard!\n' + link.substring(0, 60) + '...', 'success');
+    }).catch(() => {
+      // Fallback for older browsers
+      fallbackCopy(link);
+    });
+  } else {
+    fallbackCopy(link);
+  }
+};
+
+const fallbackCopy = (text) => {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+  showMsg('✅ Link copied! Open Chrome and paste to download.', 'success');
 };
 const saveAppSettings = async () => {
   try {
