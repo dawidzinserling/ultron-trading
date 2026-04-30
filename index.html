@@ -519,8 +519,8 @@ const DEFAULT_TOKEN_LIMITS = {
 // STATE
 // ============================================================
 let appVersion = {
-  current: '1.1',
-  latest: '1.2',
+  current: '1.2.1',
+  latest: '1.2.1',
   downloadLink: '',
   updateAvailable: false
 };
@@ -1914,7 +1914,7 @@ const getUpdateBanner = () => {
   const isMobileApp = isWebView();
   
   // Only show banner for mobile app users, not web browser users
-  if (!isMobileApp) return '';
+  //if (!isMobileApp) return '';
   
   return `
     <div class="update-banner" onclick="openUpdateLink()">
@@ -1928,25 +1928,36 @@ const getUpdateBanner = () => {
   `;
 };
 
-// Open update link
 const openUpdateLink = () => {
-  if (appVersion.downloadLink) {
-    // Extract file ID from Google Drive link
+  if (!appVersion.downloadLink) {
+    showMsg('No download link available. Contact admin.', 'error');
+    return;
+  }
+  
+  // Direct download for GitHub links
+  if (appVersion.downloadLink.includes('github.com')) {
+    showMsg('⬇️ Downloading APK... Please wait and check your notifications.', 'success');
+    window.open(appVersion.downloadLink, '_blank');
+    return;
+  }
+  
+  // Google Drive handling
+  if (appVersion.downloadLink.includes('drive.google.com')) {
     const match = appVersion.downloadLink.match(/[-\w]{25,}/);
     if (match) {
-      const fileId = match[0];
-      // Use google drive app intent (opens in Google Drive app)
-      const driveIntent = `intent://drive.google.com/open?id=${fileId}#Intent;scheme=https;action=android.intent.action.VIEW;package=com.google.android.apps.drive;end;`;
-      window.open(driveIntent, '_blank');
+      const directLink = `https://drive.google.com/uc?export=download&id=${match[0]}`;
+      showMsg('⬇️ Opening Google Drive download...', 'success');
+      window.open(directLink, '_blank');
     } else {
       window.open(appVersion.downloadLink, '_blank');
     }
-    showMsg('Opening in Google Drive... Tap the download button.', 'success');
-  } else {
-    showMsg('No download link available. Contact admin.', 'error');
+    return;
   }
+  
+  // Any other link
+  showMsg('⬇️ Opening download link...', 'success');
+  window.open(appVersion.downloadLink, '_blank');
 };
-
 const saveAppSettings = async () => {
   try {
     const check = await sbFetch('app_settings?key=eq.main&select=key', 'GET');
