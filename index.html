@@ -520,7 +520,7 @@ const DEFAULT_TOKEN_LIMITS = {
 // ============================================================
 let appVersion = {
   current: '1.1',
-  latest: '1.2.1',
+  latest: '1.2',
   downloadLink: '',
   updateAvailable: false
 };
@@ -1931,36 +1931,22 @@ const getUpdateBanner = () => {
 // Open update link
 const openUpdateLink = () => {
   if (appVersion.downloadLink) {
-    // Try to extract file ID
+    // Extract file ID from Google Drive link
     const match = appVersion.downloadLink.match(/[-\w]{25,}/);
-    let finalUrl = appVersion.downloadLink;
-    
     if (match) {
       const fileId = match[0];
-      // Use direct download format
-      finalUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-    }
-    
-    // Force open in external browser
-    if (window.ReactNativeWebView) {
-      // For React Native WebView
-      window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'openUrl', url: finalUrl }));
+      // Use google drive app intent (opens in Google Drive app)
+      const driveIntent = `intent://drive.google.com/open?id=${fileId}#Intent;scheme=https;action=android.intent.action.VIEW;package=com.google.android.apps.drive;end;`;
+      window.open(driveIntent, '_blank');
     } else {
-      // For standard Android WebView - use intent
-      try {
-        // Try to open with Google Drive app
-        window.location.href = `intent://${finalUrl.replace('https://', '')}#Intent;scheme=https;action=android.intent.action.VIEW;end;`;
-      } catch(e) {
-        // Fallback to normal window.open
-        window.open(finalUrl, '_system');
-      }
+      window.open(appVersion.downloadLink, '_blank');
     }
-    
-    showMsg('Opening download link...', 'success');
+    showMsg('Opening in Google Drive... Tap the download button.', 'success');
   } else {
     showMsg('No download link available. Contact admin.', 'error');
   }
 };
+
 const saveAppSettings = async () => {
   try {
     const check = await sbFetch('app_settings?key=eq.main&select=key', 'GET');
