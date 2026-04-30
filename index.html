@@ -1855,7 +1855,7 @@ const showUpdateModal = () => {
       4. Copy the link and paste it above</div>
       <div id="updateConfigMsg"></div>
       <div class="modal-buttons">
-        <button class="btn btn-p" onclick="saveVersionConfiguration()">💾 Save Update Configuration</button>
+        <button class="btn btn-p" onclick="saveVersionConfiguration().catch(e => alert('Error: ' + e.message))">💾 Save Update Configuration</button>
         <button class="btn btn-gh" onclick="clearUpdateConfiguration()" style="background:var(--redbg);color:var(--red);">🗑️ Clear Update</button>
         <button class="btn btn-gh" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
       </div>
