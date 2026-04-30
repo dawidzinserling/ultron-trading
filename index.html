@@ -1789,17 +1789,18 @@ const loadVersionInfo = async () => {
       const rows = await r.json();
       if (rows && rows.length > 0) {
         const saved = JSON.parse(rows[0].value);
-        appVersion = {
-          current: appVersion.current,
-          latest: saved.latest || appVersion.current,
-          downloadLink: saved.downloadLink || '',
-          updateAvailable: saved.latest !== appVersion.current && saved.latest
-        };
+        appVersion.latest = saved.latest || appVersion.current;
+        appVersion.downloadLink = saved.downloadLink || '';
+        appVersion.updateAvailable = saved.latest !== appVersion.current;
+        
+        // DEBUG - remove after testing
+        alert('Version check: current=' + appVersion.current + ' latest=' + appVersion.latest + ' updateAvailable=' + appVersion.updateAvailable);
       }
     }
-  } catch(e) { console.log('Version check failed'); }
+  } catch(e) { 
+    console.log('Version check failed:', e); 
+  }
 };
-
 // Save version info to Supabase
 const saveVersionInfo = async (latestVersion, downloadLink) => {
   try {
@@ -1903,14 +1904,17 @@ const clearUpdateConfiguration = async () => {
 const getUpdateBanner = () => {
   if (!appVersion.updateAvailable) return '';
   
-  // Check if user is on mobile app (WebView) or browser
-  const isWebView = () => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    return userAgent.includes('wv') || 
-           userAgent.includes('webview') ||
-           (window !== window.parent);
-  };
-  
+  return `
+    <div class="update-banner" onclick="openUpdateLink()">
+      <span>📱</span>
+      <div style="flex:1; margin:0 12px;">
+        <div class="update-text">NEW UPDATE AVAILABLE!</div>
+        <div style="font-size:11px; opacity:0.9;">Version ${appVersion.latest} is ready to download</div>
+      </div>
+      <button class="update-btn" onclick="event.stopPropagation();openUpdateLink()">UPDATE →</button>
+    </div>
+  `;
+};  
   const isMobileApp = isWebView();
   
   // Only show banner for mobile app users, not web browser users
