@@ -519,7 +519,7 @@ const DEFAULT_TOKEN_LIMITS = {
 // STATE
 // ============================================================
 let appVersion = {
-  current: '1.2.1',
+  current: '1.1',
   latest: '1.2.1',
   downloadLink: '',
   updateAvailable: false
@@ -1789,18 +1789,17 @@ const loadVersionInfo = async () => {
       const rows = await r.json();
       if (rows && rows.length > 0) {
         const saved = JSON.parse(rows[0].value);
-        appVersion.latest = saved.latest || appVersion.current;
-        appVersion.downloadLink = saved.downloadLink || '';
-        appVersion.updateAvailable = saved.latest !== appVersion.current;
-        
-        // DEBUG - remove after testing
-        alert('Version check: current=' + appVersion.current + ' latest=' + appVersion.latest + ' updateAvailable=' + appVersion.updateAvailable);
+        appVersion = {
+          current: appVersion.current,
+          latest: saved.latest || appVersion.current,
+          downloadLink: saved.downloadLink || '',
+          updateAvailable: saved.latest !== appVersion.current && saved.latest
+        };
       }
     }
-  } catch(e) { 
-    console.log('Version check failed:', e); 
-  }
+  } catch(e) { console.log('Version check failed'); }
 };
+
 // Save version info to Supabase
 const saveVersionInfo = async (latestVersion, downloadLink) => {
   try {
@@ -1856,7 +1855,7 @@ const showUpdateModal = () => {
       4. Copy the link and paste it above</div>
       <div id="updateConfigMsg"></div>
       <div class="modal-buttons">
-        <button class="btn btn-p" onclick="saveVersionConfiguration().catch(e => alert('Error: ' + e.message))">💾 Save Update Configuration</button>
+        <button class="btn btn-p" onclick="saveVersionConfiguration()">💾 Save Update Configuration</button>
         <button class="btn btn-gh" onclick="clearUpdateConfiguration()" style="background:var(--redbg);color:var(--red);">🗑️ Clear Update</button>
         <button class="btn btn-gh" onclick="this.closest('.modal-overlay').remove()">Cancel</button>
       </div>
@@ -1904,21 +1903,18 @@ const clearUpdateConfiguration = async () => {
 const getUpdateBanner = () => {
   if (!appVersion.updateAvailable) return '';
   
-  return `
-    <div class="update-banner" onclick="openUpdateLink()">
-      <span>📱</span>
-      <div style="flex:1; margin:0 12px;">
-        <div class="update-text">NEW UPDATE AVAILABLE!</div>
-        <div style="font-size:11px; opacity:0.9;">Version ${appVersion.latest} is ready to download</div>
-      </div>
-      <button class="update-btn" onclick="event.stopPropagation();openUpdateLink()">UPDATE →</button>
-    </div>
-  `;
-};  
+  // Check if user is on mobile app (WebView) or browser
+  const isWebView = () => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    return userAgent.includes('wv') || 
+           userAgent.includes('webview') ||
+           (window !== window.parent);
+  };
+  
   const isMobileApp = isWebView();
   
   // Only show banner for mobile app users, not web browser users
-  //if (!isMobileApp) return '';
+  if (!isMobileApp) return '';
   
   return `
     <div class="update-banner" onclick="openUpdateLink()">
@@ -1932,35 +1928,38 @@ const getUpdateBanner = () => {
   `;
 };
 
+// Open update link
 const openUpdateLink = () => {
-  if (!appVersion.downloadLink) {
-    showMsg('No download link available. Contact admin.', 'error');
-    return;
-  }
-  
-  // Direct download for GitHub links
-  if (appVersion.downloadLink.includes('github.com')) {
-    showMsg('⬇️ Downloading APK... Please wait and check your notifications.', 'success');
-    window.open(appVersion.downloadLink, '_blank');
-    return;
-  }
-  
-  // Google Drive handling
-  if (appVersion.downloadLink.includes('drive.google.com')) {
+  if (appVersion.downloadLink) {
+    // Try to extract file ID
     const match = appVersion.downloadLink.match(/[-\w]{25,}/);
+    let finalUrl = appVersion.downloadLink;
+    
     if (match) {
-      const directLink = `https://drive.google.com/uc?export=download&id=${match[0]}`;
-      showMsg('⬇️ Opening Google Drive download...', 'success');
-      window.open(directLink, '_blank');
-    } else {
-      window.open(appVersion.downloadLink, '_blank');
+      const fileId = match[0];
+      // Use direct download format
+      finalUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
     }
-    return;
+    
+    // Force open in external browser
+    if (window.ReactNativeWebView) {
+      // For React Native WebView
+      window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'openUrl', url: finalUrl }));
+    } else {
+      // For standard Android WebView - use intent
+      try {
+        // Try to open with Google Drive app
+        window.location.href = `intent://${finalUrl.replace('https://', '')}#Intent;scheme=https;action=android.intent.action.VIEW;end;`;
+      } catch(e) {
+        // Fallback to normal window.open
+        window.open(finalUrl, '_system');
+      }
+    }
+    
+    showMsg('Opening download link...', 'success');
+  } else {
+    showMsg('No download link available. Contact admin.', 'error');
   }
-  
-  // Any other link
-  showMsg('⬇️ Opening download link...', 'success');
-  window.open(appVersion.downloadLink, '_blank');
 };
 const saveAppSettings = async () => {
   try {
