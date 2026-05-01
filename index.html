@@ -519,11 +519,12 @@ const DEFAULT_TOKEN_LIMITS = {
 // STATE
 // ============================================================
 let appVersion = {
-  current: '1.1',
-  latest: '1.2.1',
+  current: '1.2.1',
+  latest: '1.1',
   downloadLink: '',
   updateAvailable: false
 };
+
 let shoppingCart = []; 
 let tokenPackages = [];
 let currentUser = null;
@@ -1789,16 +1790,16 @@ const loadVersionInfo = async () => {
       const rows = await r.json();
       if (rows && rows.length > 0) {
         const saved = JSON.parse(rows[0].value);
-        appVersion = {
-          current: appVersion.current,
-          latest: saved.latest || appVersion.current,
-          downloadLink: saved.downloadLink || '',
-          updateAvailable: saved.latest !== appVersion.current && saved.latest
-        };
+        appVersion.latest = saved.latest || appVersion.current;
+        appVersion.downloadLink = saved.downloadLink || '';
+        appVersion.updateAvailable = appVersion.latest !== appVersion.current;
       }
     }
-  } catch(e) { console.log('Version check failed'); }
+  } catch(e) { 
+    console.log('Version check failed:', e); 
+  }
 };
+
 
 // Save version info to Supabase
 const saveVersionInfo = async (latestVersion, downloadLink) => {
@@ -1899,68 +1900,30 @@ const clearUpdateConfiguration = async () => {
   }
 };
 
-// Get update banner HTML
 const getUpdateBanner = () => {
-  if (!appVersion.updateAvailable) return '';
-  
-  // Check if user is on mobile app (WebView) or browser
-  const isWebView = () => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    return userAgent.includes('wv') || 
-           userAgent.includes('webview') ||
-           (window !== window.parent);
-  };
-  
-  const isMobileApp = isWebView();
-  
-  // Only show banner for mobile app users, not web browser users
-  if (!isMobileApp) return '';
-  
+  if (!appVersion.updateAvailable || !appVersion.downloadLink) return '';
   return `
-    <div class="update-banner" onclick="openUpdateLink()">
+    <div class="update-banner" onclick="openUpdateLink()" style="cursor:pointer;">
       <span>📱</span>
       <div style="flex:1; margin:0 12px;">
-        <div class="update-text">MOBILE APP UPDATE AVAILABLE!</div>
-        <div style="font-size:11px; opacity:0.9;">Version ${appVersion.latest} is ready to download</div>
+        <div class="update-text">APP UPDATE AVAILABLE!</div>
+        <div style="font-size:11px; opacity:0.9;">Version ${appVersion.latest} — tap to download</div>
       </div>
       <button class="update-btn" onclick="event.stopPropagation();openUpdateLink()">UPDATE →</button>
     </div>
   `;
 };
 
-// Open update link
+
 const openUpdateLink = () => {
-  if (appVersion.downloadLink) {
-    // Try to extract file ID
-    const match = appVersion.downloadLink.match(/[-\w]{25,}/);
-    let finalUrl = appVersion.downloadLink;
-    
-    if (match) {
-      const fileId = match[0];
-      // Use direct download format
-      finalUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-    }
-    
-    // Force open in external browser
-    if (window.ReactNativeWebView) {
-      // For React Native WebView
-      window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'openUrl', url: finalUrl }));
-    } else {
-      // For standard Android WebView - use intent
-      try {
-        // Try to open with Google Drive app
-        window.location.href = `intent://${finalUrl.replace('https://', '')}#Intent;scheme=https;action=android.intent.action.VIEW;end;`;
-      } catch(e) {
-        // Fallback to normal window.open
-        window.open(finalUrl, '_system');
-      }
-    }
-    
-    showMsg('Opening download link...', 'success');
-  } else {
-    showMsg('No download link available. Contact admin.', 'error');
+  if (!appVersion.downloadLink) {
+    showMsg('No download link set. Contact admin.', 'error');
+    return;
   }
+  window.open(appVersion.downloadLink, '_blank');
+  showMsg('Download starting... Install the APK when complete.', 'success');
 };
+
 const saveAppSettings = async () => {
   try {
     const check = await sbFetch('app_settings?key=eq.main&select=key', 'GET');
@@ -5220,6 +5183,7 @@ const doLogin = async () => {
     await resetMonthlyTokensIfNeeded(); // ✅ ADD THIS LINE
     await loadAppSettings(); 
     await loadMarketItems(); 
+    await loadVersionInfo();
     await loadJournals(username); 
     await loadLearningItems(); 
     renderApp(); 
@@ -5232,7 +5196,8 @@ if (user) {
     if (remember) localStorage.setItem('ultron_user', username); 
     await resetMonthlyTokensIfNeeded(); // ✅ ADD THIS LINE
     await loadAppSettings(); 
-    await loadMarketItems(); 
+    await loadMarketItems();
+    await loadVersionInfo(); 
     await loadJournals(username); 
     await loadLearningItems(); 
     renderApp(); 
@@ -5543,10 +5508,28 @@ window.onload = async () => {
   const savedUser = localStorage.getItem('ultron_user');
   if (savedUser) {
     const admin = ADMINS.find(a => a.username === savedUser);
-    if (admin) { currentUser = { ...admin, role: 'admin' }; await loadMarketItems(); await loadJournals(savedUser); await loadLearningItems(); renderApp(); history.pushState({ page: 'app' }, ''); return; }
+if (admin) { 
+  currentUser = { ...admin, role: 'admin' }; 
+  await loadVersionInfo();
+  await loadMarketItems(); 
+  await loadJournals(savedUser); 
+  await loadLearningItems(); 
+  renderApp(); 
+  history.pushState({ page: 'app' }, ''); 
+  return; 
+}
     const users = await getUsers();
     const user = users.find(u => u.username === savedUser);
-    if (user) { currentUser = user; await loadMarketItems(); await loadJournals(savedUser); await loadLearningItems(); renderApp(); history.pushState({ page: 'app' }, ''); return; }
+    if (user) { 
+  currentUser = user; 
+  await loadVersionInfo();
+  await loadMarketItems(); 
+  await loadJournals(savedUser); 
+  await loadLearningItems(); 
+  renderApp(); 
+  history.pushState({ page: 'app' }, ''); 
+  return; 
+}
   }
   showLogin();
   await resetDailyTokensIfNeeded();
