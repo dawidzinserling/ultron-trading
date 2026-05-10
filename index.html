@@ -411,22 +411,7 @@ label { font-size:12px; color:var(--tx2); display:block; margin-bottom:4px; font
 ::-webkit-scrollbar-thumb { background:var(--s2); border-radius:2px; }
 
 
-.update-banner {
-  background: linear-gradient(135deg, #1E90FF, #1058A0);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  animation: pulse 1.5s infinite;
-  border: 1px solid rgba(255,255,255,0.2);
-}
-.update-banner span:first-child { font-size: 28px; }
-.update-banner .update-text { font-weight: 800; font-size: 14px; letter-spacing: 1px; }
-.update-banner .update-version { background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
-.update-banner .update-btn { background: white; color: #1E90FF; border: none; padding: 6px 16px; border-radius: 30px; font-weight: 700; font-size: 12px; cursor: pointer; }
+
 </style>
 </head>
 <body>
@@ -1899,34 +1884,8 @@ const clearUpdateConfiguration = async () => {
   }
 };
 
-// Get update banner HTML
-const getUpdateBanner = () => {
-  if (!appVersion.updateAvailable) return '';
-  
-  // Check if user is on mobile app (WebView) or browser
-  const isWebView = () => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    return userAgent.includes('wv') || 
-           userAgent.includes('webview') ||
-           (window !== window.parent);
-  };
-  
-  const isMobileApp = isWebView();
-  
-  // Only show banner for mobile app users, not web browser users
-  if (!isMobileApp) return '';
-  
-  return `
-    <div class="update-banner" onclick="openUpdateLink()">
-      <span>📱</span>
-      <div style="flex:1; margin:0 12px;">
-        <div class="update-text">MOBILE APP UPDATE AVAILABLE!</div>
-        <div style="font-size:11px; opacity:0.9;">Version ${appVersion.latest} is ready to download</div>
-      </div>
-      <button class="update-btn" onclick="event.stopPropagation();openUpdateLink()">UPDATE →</button>
-    </div>
-  `;
-};
+const getUpdateBanner = () => '';
+
 
 // Open update link
 const openUpdateLink = () => {
@@ -3758,8 +3717,7 @@ const renderHome = () => {
       <div style="font-size:10px;color:var(--tx3);margin-top:2px;">© 2025 · All rights reserved · For educational purposes only</div>
     </div>`;
 
-  const updateBanner = getUpdateBanner();
-  c.innerHTML = saleBanner + updateBanner + heroHtml + journalStatsHtml + tokenHtml + vipCardHtml + footerHtml;
+c.innerHTML = saleBanner + heroHtml + journalStatsHtml + tokenHtml + vipCardHtml + footerHtml;
 };
 // ============================================================
 // MARKETPLACE RENDER
