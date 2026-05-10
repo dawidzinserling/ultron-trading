@@ -537,11 +537,11 @@ let selectedFolder = null;
 let analysisMode = 'free';
 let selectedAI = localStorage.getItem('ultron_selected_ai') || 'gemini';
 const loadSavedKeys = () => ({
-  gemini: localStorage.getItem('ultron_gemini_key') || '',
-  openai: localStorage.getItem('ultron_openai_key') || '',
-  claude: localStorage.getItem('ultron_claude_key') || '',
-  grok: localStorage.getItem('ultron_grok_key') || '',
-  mistral: localStorage.getItem('ultron_mistral_key') || '',
+  gemini: localStorage.getItem('gemini_key') || '',
+  openai: localStorage.getItem('openai_key') || '',
+  claude: localStorage.getItem('claude_key') || '',
+  grok: localStorage.getItem('grok_key') || '',
+  mistral: localStorage.getItem('mistral_key') || '',
 });
 let aiApiKeys = loadSavedKeys();
 // REMOVED: learningFolders - no longer needed
@@ -3112,10 +3112,9 @@ const saveKeyLive = (value) => {
   const key = value.trim();
   if (key.length > 10) {
     aiApiKeys[selectedAI] = key;
-    localStorage.setItem('ultron_' + selectedAI + '_key', key);
+    localStorage.setItem(selectedAI + '_key', key);
   }
 };
-
 const runBasicAnalysis = async () => {
   if (!chartImageFile) { showMsg('Upload a chart first', 'error'); return; }
   
@@ -4814,11 +4813,10 @@ const removeBroker = async (index) => {
 const clearAIKey = (aiId) => {
   if (!confirm('Clear saved ' + aiId.toUpperCase() + ' API key?')) return;
   aiApiKeys[aiId] = '';
-  localStorage.removeItem('ultron_' + aiId + '_key');
+  localStorage.removeItem(aiId + '_key');
   renderSettings();
   showMsg(aiId.toUpperCase() + ' key cleared', 'success');
 };
-
 const renderPipCalc = () => {
   const c = document.getElementById('pipContainer'); if (!c) return;
   c.innerHTML = `
